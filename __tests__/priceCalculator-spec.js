@@ -16,7 +16,7 @@ test('Four unique products charged at correct discounted rate', () => {
 });
 
 test('Five unique products charged at correct discount rate', () => {
-    var expectedTotal = 5 * 299 * (1-.25);
+    var expectedTotal = 5 * 299 * .75;
     expect(pricing.computeTotalPrice(['A','B','C','D','E'])).toBe(expectedTotal);
 });
 
@@ -26,11 +26,6 @@ test('Set of only non-unique products charged at base rate', () => {
 });
 
 test('Mix of unique and non-unique products charged at discount and base rate respectively', () => {
-    var expectedTotal = (5 * 299 * .75) + (5 * 299);
+    var expectedTotal = (5 * 299 * .75) + (3 * 299 * .90) + (2 * 299 * .95);
     expect(pricing.computeTotalPrice(['A','A','A','B','B','C','D','E','E','E'])).toBe(expectedTotal);
-});
-
-test('Single products charged at base rate', () => {
-    var expectedTotal = (4 * 299) + 5 * 299 * (1-.25);
-    expect(pricing.computeTotalPrice(['A','A','B','B','C','D','E','E','E'])).toBe(expectedTotal);
 });
